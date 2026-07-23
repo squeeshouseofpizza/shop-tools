@@ -48,7 +48,8 @@
     ".shop-thumb .layouts button{width:100%;padding:9px 6px}",
     ".shop-thumb .layouts button[aria-pressed=true]{background:var(--gold);color:#17120c;border-color:var(--gold)}",
     ".shop-thumb .sl{display:flex;align-items:center;gap:9px}.shop-thumb .sl input[type=range]{flex:1}",
-    ".shop-thumb .sl output{width:44px;text-align:right;font-size:12px;color:var(--ink-dim);font-variant-numeric:tabular-nums}",
+    ".shop-thumb .sl .nv{width:58px;flex:0 0 58px;text-align:right;font-size:12px;color:var(--ink);background:#0f0c08;border:1px solid var(--line);border-radius:3px;padding:4px 5px;font-family:'EB Garamond',serif;font-variant-numeric:tabular-nums}",
+    ".shop-thumb .sl .nv:focus{border-color:var(--gold);outline:none}",
     ".shop-thumb .ck{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:13px;color:var(--ink-dim)}",
     ".shop-thumb .ck input{accent-color:var(--gold)}.shop-thumb .ck label{margin:0}",
     ".shop-thumb .note{font-size:12px;color:var(--ink-dim);line-height:1.5;margin:8px 0 0}",
@@ -104,9 +105,9 @@
           '<div class="row"><input type="text" id="st-card1" placeholder="Parallax Wave">' +
           '<button id="st-fetch1" style="flex:0 0 84px">Fetch</button></div>' +
           '<button id="st-clear1" style="margin-top:8px">Clear art</button>' +
-          '<label>Zoom</label><div class="sl"><input type="range" id="st-s1" min="100" max="260" value="100"><output>100</output></div>' +
-          '<label>Pan X</label><div class="sl"><input type="range" id="st-x1" min="-100" max="100" value="0"><output>0</output></div>' +
-          '<label>Pan Y</label><div class="sl"><input type="range" id="st-y1" min="-100" max="100" value="0"><output>0</output></div>' +
+          '<label>Zoom</label><div class="sl"><input type="range" id="st-s1" min="100" max="260" value="100"><input type="number" class="nv" value="100"></div>' +
+          '<label>Pan X</label><div class="sl"><input type="range" id="st-x1" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
+          '<label>Pan Y</label><div class="sl"><input type="range" id="st-y1" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
         '</fieldset>' +
         '<fieldset id="st-art2box"><legend>Opponent</legend>' +
           '<label>Archetype</label><select id="st-arch2"></select>' +
@@ -114,15 +115,15 @@
           '<div class="row"><input type="text" id="st-card2" placeholder="Psychatog">' +
           '<button id="st-fetch2" style="flex:0 0 84px">Fetch</button></div>' +
           '<button id="st-clear2" style="margin-top:8px">Clear art</button>' +
-          '<label>Zoom</label><div class="sl"><input type="range" id="st-s2" min="100" max="260" value="100"><output>100</output></div>' +
-          '<label>Pan X</label><div class="sl"><input type="range" id="st-x2" min="-100" max="100" value="0"><output>0</output></div>' +
-          '<label>Pan Y</label><div class="sl"><input type="range" id="st-y2" min="-100" max="100" value="0"><output>0</output></div>' +
+          '<label>Zoom</label><div class="sl"><input type="range" id="st-s2" min="100" max="260" value="100"><input type="number" class="nv" value="100"></div>' +
+          '<label>Pan X</label><div class="sl"><input type="range" id="st-x2" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
+          '<label>Pan Y</label><div class="sl"><input type="range" id="st-y2" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
         '</fieldset><div class="status" id="st-status"></div>' +
 
         '<h4>Hook text</h4>' +
         '<textarea id="st-hook" rows="2" placeholder="punished for greed"></textarea>' +
         '<div class="wc" id="st-wc"></div>' +
-        '<label>Size</label><div class="sl"><input type="range" id="st-hookSize" min="70" max="180" value="126"><output>126</output></div>' +
+        '<label>Size</label><div class="sl"><input type="range" id="st-hookSize" min="70" max="180" value="126"><input type="number" class="nv" value="126"></div>' +
         '<label>Typeface</label><select id="st-hookFont">' +
           '<option value="Anton">Anton (condensed)</option>' +
           '<option value="Archivo Black">Archivo Black (wide)</option></select>' +
@@ -136,9 +137,9 @@
         '<div id="st-cutList"></div>' +
         '<fieldset id="st-cutEdit" disabled><legend>Selected</legend>' +
           '<div class="ck"><input type="checkbox" id="st-cutFlip"><label for="st-cutFlip">Flip horizontally</label></div>' +
-          '<label>Size</label><div class="sl"><input type="range" id="st-cutS" min="25" max="160" value="88"><output>88</output></div>' +
-          '<label>Position across frame</label><div class="sl"><input type="range" id="st-cutX" min="0" max="100" value="78"><output>78</output></div>' +
-          '<label>Vertical nudge</label><div class="sl"><input type="range" id="st-cutY" min="-50" max="50" value="0"><output>0</output></div>' +
+          '<label>Size</label><div class="sl"><input type="range" id="st-cutS" min="25" max="160" value="88"><input type="number" class="nv" value="88"></div>' +
+          '<label>Position across frame</label><div class="sl"><input type="range" id="st-cutX" min="0" max="100" value="78"><input type="number" class="nv" value="78"></div>' +
+          '<label>Vertical nudge</label><div class="sl"><input type="range" id="st-cutY" min="-50" max="50" value="0"><input type="number" class="nv" value="0"></div>' +
           '<div class="row" style="margin-top:10px"><button id="st-cutBack">Send back</button><button id="st-cutFront">Bring front</button></div>' +
         '</fieldset>' +
 
@@ -149,13 +150,13 @@
           '<option value="full">Squee\'s House of Pizza</option>' +
           '<option value="logo">Uploaded mark</option></select>' +
         '<label>Mark image</label><input type="file" id="st-logoFile" accept="image/png,image/webp">' +
-        '<label>Bar height</label><div class="sl"><input type="range" id="st-barH" min="34" max="92" value="52"><output>52</output></div>' +
+        '<label>Bar height</label><div class="sl"><input type="range" id="st-barH" min="34" max="92" value="52"><input type="number" class="nv" value="52"></div>' +
         '<label>Series label</label><input type="text" id="st-series" value="MTGO League">' +
         '<label>Corner chip</label><input type="text" id="st-chip" placeholder="July 2026">' +
         '<div class="ck"><input type="checkbox" id="st-chipOn" checked><label for="st-chipOn">Show chip</label></div>' +
 
         '<h4>Contrast</h4>' +
-        '<label>Scrim strength</label><div class="sl"><input type="range" id="st-scrim" min="0" max="100" value="72"><output>72</output></div>' +
+        '<label>Scrim strength</label><div class="sl"><input type="range" id="st-scrim" min="0" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
 
         '<h4>Export</h4>' +
         '<button class="solid" id="st-export" style="width:100%">Download 1280 &times; 720 PNG</button>' +
@@ -191,8 +192,8 @@
     s1: 100, x1: 0, y1: 0, s2: 100, x2: 0, y2: 0,
     hook: "punished for greed", hookSize: 126, hookFont: "Anton",
     hookGold: false, hookPanel: false, cutOn: true,
-    barOn: true, barMode: "short", barH: 52, series: "MTGO League",
-    chip: "", chipOn: true, scrim: 72
+    barOn: true, barMode: "full", barH: 52, series: "MTGO League",
+    chip: "", chipOn: true, scrim: 0
   };
 
   var NOTES = {
@@ -482,9 +483,16 @@
     el("cutFlip").checked = c.flip;
   }
 
+  function clamp(range, v) {
+    if (v === "" || isNaN(v)) v = +range.value;
+    return Math.min(+range.max, Math.max(+range.min, Math.round(v)));
+  }
   function slider(id, key) {
     var n = el(id), o = n.nextElementSibling;
-    n.addEventListener("input", function () { S[key] = +n.value; o.value = n.value; render(); });
+    function push(v) { v = clamp(n, v); n.value = v; o.value = v; S[key] = v; render(); }
+    n.addEventListener("input", function () { push(+n.value); });
+    o.addEventListener("change", function () { push(+o.value); });
+    o.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); push(+o.value); o.blur(); } });
     o.value = n.value;
   }
   ["s1", "x1", "y1", "s2", "x2", "y2"].forEach(function (k) { slider(k, k); });
@@ -492,10 +500,13 @@
 
   function cutSlider(id, key) {
     var n = el(id), o = n.nextElementSibling;
-    n.addEventListener("input", function () {
-      o.value = n.value;
-      var c = S.cuts[S.active]; if (c) { c[key] = +n.value; render(); }
-    });
+    function push(v) {
+      v = clamp(n, v); n.value = v; o.value = v;
+      var c = S.cuts[S.active]; if (c) { c[key] = v; render(); }
+    }
+    n.addEventListener("input", function () { push(+n.value); });
+    o.addEventListener("change", function () { push(+o.value); });
+    o.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); push(+o.value); o.blur(); } });
     o.value = n.value;
   }
   cutSlider("cutS", "s"); cutSlider("cutX", "x"); cutSlider("cutY", "y");
@@ -581,6 +592,7 @@
   });
 
   el("hook").value = S.hook;
+  el("barMode").value = S.barMode;
   el("art2box").style.display = "none";
   el("layoutNote").textContent = NOTES.hero;
   renderCutList();
