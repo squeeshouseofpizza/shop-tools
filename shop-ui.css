@@ -59,13 +59,15 @@
   .shop-ui .ui-title { font-size: 30px; }
 }
 
-/* Three columns (links, main, side) that stack on a phone with the side modules first */
+/* Three columns (links, main, side) that stack in one column, side modules first, below 1000px
+   (the three need about 984px with page padding, so a narrower window would drop the side column under the rest) */
 .shop-ui .ui-grid { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
 .shop-ui .ui-left { flex: 1 1 180px; max-width: 200px; display: flex; flex-direction: column; gap: 16px; }
 .shop-ui .ui-main { flex: 999 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 16px; }
 .shop-ui .ui-right { flex: 1 1 280px; max-width: 300px; display: flex; flex-direction: column; gap: 16px; }
-@media (max-width: 900px) {
-  .shop-ui .ui-left, .shop-ui .ui-right { max-width: none; }
+@media (max-width: 1000px) {
+  .shop-ui .ui-grid { flex-direction: column; flex-wrap: nowrap; align-items: stretch; }
+  .shop-ui .ui-left, .shop-ui .ui-main, .shop-ui .ui-right { flex: none; max-width: none; }
   .shop-ui .ui-right { order: -1; }
   .shop-ui .ui-left { order: 3; }
 }
@@ -111,10 +113,11 @@
 .shop-ui .ui-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .shop-ui .ui-table { width: 100%; border-collapse: collapse; font-family: var(--ui-label); font-size: 12px; }
 .shop-ui .ui-table th { text-align: left; font-weight: bold; color: var(--ui-ink); padding: 6px 8px; border-bottom: 1px solid var(--ui-gold); white-space: nowrap; }
-.shop-ui .ui-table td { padding: 6px 8px; white-space: nowrap; }
+.shop-ui .ui-table td { padding: 6px 8px; }  /* cells wrap between words so a table fits a phone */
+.shop-ui .ui-table td.ui-n { white-space: nowrap; }
 .shop-ui .ui-table tbody tr:nth-child(odd) td { background: var(--ui-stripe); }
 .shop-ui .ui-table .ui-n { text-align: right; font-variant-numeric: tabular-nums; }
-.shop-ui .ui-table td a { color: var(--ui-ink); font-family: var(--ui-body); font-weight: 600; font-size: 15px; }
+.shop-ui .ui-table td a { color: var(--ui-ink); font-family: var(--ui-body); font-weight: 600; font-size: 15px; overflow-wrap: break-word; }
 .shop-ui .ui-table td a:hover { color: var(--ui-gold-lite); }
 
 /* Ledger: label left, figure right */
@@ -132,7 +135,7 @@
 .shop-ui .ui-board li { display: grid; grid-template-columns: 1.8em minmax(0, 1fr) auto; column-gap: 8px; align-items: baseline; padding: 4px 0; }
 .shop-ui .ui-board .ui-rk { font-family: var(--ui-label); font-size: 11px; color: var(--ui-muted); text-align: right; }
 .shop-ui .ui-board .ui-rk.ui-first { color: var(--ui-gold); font-weight: bold; }
-.shop-ui .ui-board a { color: var(--ui-ink); font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.shop-ui .ui-board a { color: var(--ui-ink); font-weight: 600; overflow-wrap: anywhere; }
 .shop-ui .ui-board a:hover { color: var(--ui-gold-lite); }
 .shop-ui .ui-board .ui-v { font-family: var(--ui-label); font-size: 11px; color: var(--ui-muted); font-variant-numeric: tabular-nums; }
 
