@@ -1,4 +1,4 @@
-/* Squee's House of Pizza - thumbnail generator (general channel)
+/* S.H.O.P. thumbnail generator (general channel)
    Hosted script. Mounts into <div id="shop-thumbgen"></div>.
    All CSS scoped under .shop-thumb, all IDs prefixed st-, everything inside an IIFE. */
 (function () {
@@ -73,7 +73,7 @@
   /* ---------- markup ---------- */
   MOUNT.className = "shop-thumb";
   MOUNT.innerHTML =
-    '<div class="hdr"><strong>Squee\'s House of Pizza</strong><em>thumbnail generator</em></div>' +
+    '<div class="hdr"><strong>S.H.O.P.</strong><em>thumbnail generator</em></div>' +
     '<div class="wrap">' +
       '<div class="stage">' +
         '<canvas id="st-main" width="1280" height="720"></canvas>' +
@@ -227,7 +227,7 @@
                 (c.card_faces && c.card_faces[0].image_uris.art_crop);
         if (!u) throw 0;
         var i = new Image(); i.crossOrigin = "anonymous";
-        i.onload = function () { S[slot] = i; setStatus(c.name + " \u2014 " + c.set_name); render(); };
+        i.onload = function () { S[slot] = i; setStatus(c.name + ", " + c.set_name); render(); };
         i.onerror = function () { setStatus("Image failed to load."); };
         i.src = u;
       })
@@ -437,7 +437,7 @@
     el("rdWords").innerHTML = "Words: <span class='" + (ok ? "g" : "w") + "'>" + words +
       (words === 0 ? " (empty)" : ok ? " (good)" : " (over three, expect lower CTR)") + "</span>";
     el("wc").innerHTML = "<span class='" + (ok ? "g" : "w") + "'>" + words +
-      " word" + (words === 1 ? "" : "s") + (ok ? "" : " \u2014 trim to three") + "</span>";
+      " word" + (words === 1 ? "" : "s") + (ok ? "" : ", trim to three") + "</span>";
     if (lastLuma === null) el("rdLuma").textContent = "Background under text: not measurable";
     else {
       var v = Math.round(lastLuma), safe = v < 110;
@@ -446,7 +446,7 @@
     }
     var faces = S.cutOn && S.cuts.length > 0;
     el("rdFace").innerHTML = "Face in frame: <span class='" + (faces ? "g" : "w") + "'>" +
-      (faces ? "yes" : "none \u2014 69% of breakout thumbnails have one") + "</span>";
+      (faces ? "yes" : "none (69% of breakout thumbnails have one)") + "</span>";
   }
 
   function renderCutList() {

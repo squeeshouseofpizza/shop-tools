@@ -1,9 +1,12 @@
-/* S.H.O.P. UI, v1.0.0
+/* S.H.O.P. UI
    The shared look for squeeshouseofpizza.com and every S.H.O.P. tool: the Premodern-era Magic web
    (gold title bars, beveled modules, striped tables, dated lists), built with what we know now.
 
-   Use it at an exact version so a later change never reaches a live page by surprise:
-     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/squeeshouseofpizza/shop-tools@v1.0.0/shop-ui.css">
+   Use it pinned to a commit so a later change never reaches a live page by surprise (there is no
+   version tag yet; a tag link would not load):
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/squeeshouseofpizza/shop-tools@<commit>/shop-ui.css">
+   The Record Book keeps its own copy (premodern-stats src/shop-ui.css). The two stay identical:
+   a change to one goes into the other in the same change.
    and load the fonts it names:
      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Courier+Prime:wght@400;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap">
 
@@ -20,7 +23,7 @@
   --ui-gold: #d6a34a;
   --ui-gold-lite: #e6b862;   /* links, names */
   --ui-gold-hover: #f0d590;
-  --ui-on-gold: #17120c;     /* text on gold, 8.2:1 */
+  --ui-on-gold: #1c1d21;     /* text on gold: the ground, 7.4:1 */
   --ui-ink: #ece9e2;
   --ui-muted: #a6a49d;       /* 5.8:1 on the stripe, the lowest pairing used */
   --ui-display: "Cinzel", Georgia, serif;
@@ -155,7 +158,7 @@
 /* Tabs: underline, no pills */
 .shop-ui .ui-tabs { display: flex; flex-wrap: wrap; gap: 0 16px; font-family: var(--ui-label); font-size: 11px; margin-bottom: 8px; border-bottom: 1px solid var(--ui-rule); }
 .shop-ui .ui-tabs button { font: inherit; color: var(--ui-muted); background: none; border: 0; border-bottom: 2px solid transparent; padding: 6px 0 5px; margin-bottom: -1px; cursor: pointer; }
-.shop-ui .ui-tabs button[aria-pressed="true"], .shop-ui .ui-tabs button[aria-selected="true"] { color: var(--ui-ink); border-bottom-color: var(--ui-gold); font-weight: bold; }
+.shop-ui .ui-tabs button[aria-pressed="true"], .shop-ui .ui-tabs button[aria-selected="true"] { color: var(--ui-ink); border-bottom-color: var(--ui-gold); }  /* no bold: a wider label shifted the tabs after it */
 
 /* Small print */
 .shop-ui .ui-note { font-family: var(--ui-label); font-size: 11px; color: var(--ui-muted); margin: 8px 0 0; }
