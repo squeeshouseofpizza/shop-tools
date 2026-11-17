@@ -88,7 +88,7 @@
         '<h4>Layout</h4>' +
         '<div class="layouts" id="st-layouts">' +
           '<button data-layout="hero" aria-pressed="true">Hero</button>' +
-          '<button data-layout="versus" aria-pressed="false">Versus</button>' +
+          '<button data-layout="versus" aria-pressed="false">Split</button>' +
           '<button data-layout="statement" aria-pressed="false">Statement</button>' +
           '<button data-layout="feature" aria-pressed="false">Feature</button>' +
         '</div><p class="note" id="st-layoutNote"></p>' +
@@ -109,12 +109,13 @@
           '<label>Pan X</label><div class="sl"><input type="range" id="st-x1" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
           '<label>Pan Y</label><div class="sl"><input type="range" id="st-y1" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
         '</fieldset>' +
-        '<fieldset id="st-art2box"><legend>Opponent</legend>' +
+        '<fieldset id="st-art2box"><legend>Second card</legend>' +
           '<label>Archetype</label><select id="st-arch2"></select>' +
           '<label>Or card name</label>' +
           '<div class="row"><input type="text" id="st-card2" placeholder="Psychatog">' +
           '<button id="st-fetch2" style="flex:0 0 84px">Fetch</button></div>' +
           '<button id="st-clear2" style="margin-top:8px">Clear art</button>' +
+          '<div class="ck"><input type="checkbox" id="st-vsOn" checked><label for="st-vsOn">Show VS badge</label></div>' +
           '<label>Zoom</label><div class="sl"><input type="range" id="st-s2" min="100" max="260" value="100"><input type="number" class="nv" value="100"></div>' +
           '<label>Pan X</label><div class="sl"><input type="range" id="st-x2" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
           '<label>Pan Y</label><div class="sl"><input type="range" id="st-y2" min="-100" max="100" value="0"><input type="number" class="nv" value="0"></div>' +
@@ -191,14 +192,14 @@
     cuts: [], active: -1,
     s1: 100, x1: 0, y1: 0, s2: 100, x2: 0, y2: 0,
     hook: "punished for greed", hookSize: 126, hookFont: "Anton",
-    hookGold: false, hookPanel: false, cutOn: true,
+    hookGold: false, hookPanel: false, cutOn: true, vsOn: true,
     barOn: true, barMode: "full", barH: 52, series: "MTGO League",
     chip: "", chipOn: true, scrim: 0
   };
 
   var NOTES = {
     hero: "One card art, scrim on the left, cutout right. Default for league videos and deck content.",
-    versus: "Diagonal split, two arts, gold seam. For head-to-head matches and archetype comparisons.",
+    versus: "Diagonal split, two arts, gold seam. For matchups, or two key cards from one deck. Turn off the VS badge for showcases.",
     statement: "Art pushed back, text dominant. For bans, news, reactions. Weakest layout without a face in it.",
     feature: "Person dominant over a soft field. For tournament reports, interviews, crew talk."
   };
@@ -398,11 +399,13 @@
       ctx.beginPath(); ctx.moveTo(tx, -10); ctx.lineTo(bx, H + 10); ctx.stroke();
       drawCutouts();
       drawHook(W / 2, 208, W - 150, Math.min(S.hookSize, 108), "center");
-      ctx.save(); ctx.translate((tx + bx) / 2, H * .5); ctx.rotate(Math.PI / 4);
-      ctx.fillStyle = GOLD; ctx.fillRect(-52, -52, 104, 104); ctx.rotate(-Math.PI / 4);
-      ctx.fillStyle = DARK; ctx.font = "400 46px 'Anton', Impact, sans-serif";
-      ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("VS", 0, 2);
-      ctx.restore(); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      if (S.vsOn) {
+        ctx.save(); ctx.translate((tx + bx) / 2, H * .5); ctx.rotate(Math.PI / 4);
+        ctx.fillStyle = GOLD; ctx.fillRect(-52, -52, 104, 104); ctx.rotate(-Math.PI / 4);
+        ctx.fillStyle = DARK; ctx.font = "400 46px 'Anton', Impact, sans-serif";
+        ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("VS", 0, 2);
+        ctx.restore(); ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      }
     } else if (S.layout === "statement") {
       field("art1", S.s1, S.x1, S.y1);
       ctx.fillStyle = "rgba(11,8,5," + (.34 + .5 * S.scrim / 100).toFixed(3) + ")";
@@ -528,7 +531,7 @@
   ["hook", "series", "chip"].forEach(function (k) {
     el(k).addEventListener("input", function (e) { S[k] = e.target.value; render(); });
   });
-  ["hookGold", "hookPanel", "cutOn", "barOn", "chipOn"].forEach(function (k) {
+  ["hookGold", "hookPanel", "cutOn", "barOn", "chipOn", "vsOn"].forEach(function (k) {
     el(k).addEventListener("change", function (e) { S[k] = e.target.checked; render(); });
   });
   el("hookFont").addEventListener("change", function (e) { S.hookFont = e.target.value; render(); });
