@@ -286,7 +286,7 @@
     ctx.font = "400 " + f.size + "px '" + S.hookFont + "', Impact, sans-serif";
     var widest = 0;
     f.lines.forEach(function (l) { widest = Math.max(widest, ctx.measureText(l).width); });
-    var lh = f.size * 1.02, total = lh * f.lines.length, top = baseY - total;
+    var lh = f.size * 1.02, total = lh * f.lines.length, top = Math.max(baseY - total, 28);
     var zx = align === "center" ? cx - widest / 2 : cx;
     lastZone = { x: zx - 24, y: top - 10, w: widest + 48, h: total + 20 };
     measureLuma();
@@ -375,8 +375,8 @@
     g.addColorStop(1, "rgba(11,8,5," + (.9 * a).toFixed(3) + ")");
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
-  function field(slot, z, px, py) {
-    if (S[slot]) cover(S[slot], 0, 0, W, H, z, px, py); else houseField(0, 0, W, H);
+  function field(slot, z, px, py, x, w) {
+    if (S[slot]) cover(S[slot], x || 0, 0, w || W, H, z, px, py); else houseField(0, 0, W, H);
   }
 
   function render() {
@@ -388,9 +388,9 @@
     if (S.layout === "versus") {
       var tx = W * .62, bx = W * .38;
       ctx.save(); ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(tx, 0); ctx.lineTo(bx, H); ctx.lineTo(0, H);
-      ctx.closePath(); ctx.clip(); field("art1", S.s1, S.x1, S.y1); ctx.restore();
+      ctx.closePath(); ctx.clip(); field("art1", S.s1, S.x1, S.y1, 0, tx); ctx.restore();
       ctx.save(); ctx.beginPath(); ctx.moveTo(tx, 0); ctx.lineTo(W, 0); ctx.lineTo(W, H); ctx.lineTo(bx, H);
-      ctx.closePath(); ctx.clip(); field("art2", S.s2, S.x2, S.y2); ctx.restore();
+      ctx.closePath(); ctx.clip(); field("art2", S.s2, S.x2, S.y2, bx, W - bx); ctx.restore();
       var g = ctx.createLinearGradient(0, 0, 0, H * .55);
       g.addColorStop(0, "rgba(11,8,5," + (.88 * S.scrim / 100).toFixed(3) + ")");
       g.addColorStop(1, "rgba(11,8,5,0)");
